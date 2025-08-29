@@ -413,198 +413,111 @@ ImunesTab:AddToggle({
     end
 })
 
--- Sistema para Sumir/Aparecer Jogador Individual
-local armazenados = {}
-local selectedPlayerName = ""
+ImunesTab:AddToggle({
+    Name = "Sumir Jogador",
+    Description = "Ativa ou desativa o sumiço do jogador escolhido",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local StarterGui = game:GetService("StarterGui")
+        local LocalPlayer = Players.LocalPlayer
 
--- Função: encontrar jogador
-local function findPlayerByName(name)
-    name = string.lower(name)
-    for _, player in ipairs(Players:GetPlayers()) do
-        if string.find(string.lower(player.Name), name) then
-            return player
+        -- Variáveis persistentes
+        if not _G.hiddenPlayers then
+            _G.hiddenPlayers = {}
         end
-    end
-    return nil
-end
+        if not _G.selectedPlayerName then
+            _G.selectedPlayerName = ""
+        end
 
--- Função: sumir jogador
-local function sumirJogador(player)
-    if player ~= LocalPlayer and player.Character and player.Character.Parent == workspace then
-        armazenados[player.Name] = player.Character
-        player.Character.Parent = nil
-        return true
-    end
-    return false
-end
+        -- Caixa de texto para digitar o nome do jogador
+        if not _G.playerTextboxCreated then
+            ImunesTab:AddTextBox({
+                Name = "Nome do Jogador",
+                Description = "Digite o nome para sumir/aparecer",
+                PlaceholderText = "Digite o nome...",
+                Callback = function(input)
+                    _G.selectedPlayerName = input
+                    if input ~= "" then
+                        local found = nil
+                        for _, p in ipairs(Players:GetPlayers()) do
+                            if string.find(string.lower(p.Name), string.lower(input)) then
+                                found = p
+                                break
+                            end
+                        end
+                        if found then
+                            StarterGui:SetCore("SendNotification", {
+                                Title = "✅ Jogador encontrado",
+                                Text = found.Name,
+                                Duration = 3
+                            })
+                        else
+                            StarterGui:SetCore("SendNotification", {
+                                Title = "❌ Erro",
+                                Text = "Jogador '" .. input .. "' não encontrado!",
+                                Duration = 3
+                            })
+                            _G.selectedPlayerName = ""
+                        end
+                    end
+                end
+            })
+            _G.playerTextboxCreated = true
+        end
 
--- Função: aparecer jogador
-local function aparecerJogador(player)
-    if armazenados[player.Name] then
-        armazenados[player.Name].Parent = workspace
-        armazenados[player.Name] = nil
-        return true
-    end
-    return false
-end
+        -- Funções de sumir/aparecer
+        local function sumirJogador(player)
+            if player ~= LocalPlayer and player.Character and player.Character.Parent == workspace then
+                _G.hiddenPlayers[player.Name] = player.Character
+                player.Character.Parent = nil
+                return true
+            end
+            return false
+        end
 
--- === UI DO REDZ HUB DENTRO DA ABA IMUNES ===
-ImunesTab:AddSection({ Name = "Sistema de Sumir/Aparecer Jogador" })
-ImunesTab:AddSection({ Name = "Digite um nome, clique em Iniciar para sumir, ou Parar para voltar." })
+        local function aparecerJogador(player)
+            if _G.hiddenPlayers[player.Name] then
+                _G.hiddenPlayers[player.Name].Parent = workspace
+                _G.hiddenPlayers[player.Name] = nil
+                return true
+            end
+            return false
+        end
 
-ImunesTab:AddTextBox({
-    Name = "Nome do Jogador",
-    Description = "Digite o nome do jogador",
-    PlaceholderText = "Exemplo: Gabriel",
-    Callback = function(input)
-        selectedPlayerName = input
-        if input ~= "" then
-            local player = findPlayerByName(input)
+        if state then
+            -- Ativa
+            local player = Players:FindFirstChild(_G.selectedPlayerName)
             if player then
-                StarterGui:SetCore("SendNotification", {
-                    Title = "✅ Jogador Encontrado",
-                    Text = "Selecionado: " .. player.Name,
-                    Duration = 3
-                })
+                if sumirJogador(player) then
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "🫥 Sumiu",
+                        Text = player.Name,
+                        Duration = 3
+                    })
+                end
             else
                 StarterGui:SetCore("SendNotification", {
                     Title = "❌ Erro",
-                    Text = "Jogador '" .. input .. "' não encontrado",
+                    Text = "Digite o nome de um jogador válido!",
                     Duration = 3
                 })
-                selectedPlayerName = ""
             end
-        end
-    end
-})
-
--- Botão: sumir jogador
-ImunesTab:AddButton({
-    Name = "🫥 Iniciar Sumimento",
-    Description = "Faz o jogador selecionado sumir",
-    Callback = function()
-        if selectedPlayerName == "" then
-            StarterGui:SetCore("SendNotification", {
-                Title = "❌ Erro",
-                Text = "Digite um nome primeiro!",
-                Duration = 3
-            })
-            return
-        end
-
-        local player = findPlayerByName(selectedPlayerName)
-        if player then
-            if armazenados[player.Name] then
-                StarterGui:SetCore("SendNotification", {
-                    Title = "⚠️ Já Sumido",
-                    Text = player.Name .. " já está sumido",
-                    Duration = 3
-                })
-            else
-                if sumirJogador(player) then
-                    StarterGui:SetCore("SendNotification", {
-                        Title = "🫥 Sucesso",
-                        Text = "SUMIU: " .. player.Name,
-                        Duration = 3
-                    })
-                end
-            end
-        end
-    end
-})
-
--- Botão: aparecer jogador
-ImunesTab:AddButton({
-    Name = "👁️ Parar Sumimento",
-    Description = "Faz o jogador selecionado aparecer de novo",
-    Callback = function()
-        if selectedPlayerName == "" then
-            StarterGui:SetCore("SendNotification", {
-                Title = "❌ Erro",
-                Text = "Digite um nome primeiro!",
-                Duration = 3
-            })
-            return
-        end
-
-        local player = findPlayerByName(selectedPlayerName)
-        if player then
-            if armazenados[player.Name] then
+        else
+            -- Desativa
+            local player = Players:FindFirstChild(_G.selectedPlayerName)
+            if player then
                 if aparecerJogador(player) then
                     StarterGui:SetCore("SendNotification", {
-                        Title = "👁️ Sucesso",
-                        Text = "APARECEU: " .. player.Name,
+                        Title = "👁️ Apareceu",
+                        Text = player.Name,
                         Duration = 3
                     })
                 end
-            else
-                StarterGui:SetCore("SendNotification", {
-                    Title = "⚠️",
-                    Text = player.Name .. " não está sumido!",
-                    Duration = 3
-                })
             end
         end
     end
 })
-
--- Botão: aparecer todos
-ImunesTab:AddButton({
-    Name = "👥 Aparecer Todos",
-    Description = "Faz TODOS os jogadores voltarem",
-    Callback = function()
-        local count = 0
-        for nome, character in pairs(armazenados) do
-            if Players:FindFirstChild(nome) and character then
-                character.Parent = workspace
-                count += 1
-            end
-        end
-        armazenados = {}
-
-        StarterGui:SetCore("SendNotification", {
-            Title = "👥 Restaurar",
-            Text = count > 0 and (count .. " jogadores apareceram!") or "Nenhum jogador estava sumido!",
-            Duration = 4
-        })
-    end
-})
-
--- Botão: listar sumidos
-ImunesTab:AddButton({
-    Name = "📋 Listar Sumidos",
-    Description = "Mostra quem está sumido",
-    Callback = function()
-        local names = {}
-        for nome, _ in pairs(armazenados) do
-            if Players:FindFirstChild(nome) then
-                table.insert(names, nome)
-            end
-        end
-
-        if #names > 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "📋 Jogadores Sumidos",
-                Text = table.concat(names, ", "),
-                Duration = 5
-            })
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "📋 Jogadores Sumidos",
-                Text = "Nenhum jogador está sumido",
-                Duration = 3
-            })
-        end
-    end
-})
-
--- Limpa sumidos quando o player sai
-Players.PlayerRemoving:Connect(function(player)
-    if armazenados[player.Name] then
-        armazenados[player.Name] = nil
-    end
-end)
-
 
 local TrollTab = Window:MakeTab({ Title = "Scripts Trolls", Icon = "rbxassetid://13364900349" })
 
