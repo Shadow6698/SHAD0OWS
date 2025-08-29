@@ -17,8 +17,7 @@ local ImunesTab = Window:MakeTab({"Proteção", "shield"})
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
+
 
 local function moveToBackup(obj, backupTable)
     table.insert(backupTable, { object = obj, originalParent = obj.Parent })
@@ -37,38 +36,6 @@ end
 local removedVehicles, removedCanoes, removedJets, removedHelis, removedBalls = {}, {}, {}, {}, {}
 local antiVehicleConnection, antiCanoeConnection, antiJetConnection, antiHeliConnection, antiBallConnection, antiSitConnection
 
--- Variáveis do sistema de sumimento
-local armazenados = {}
-local selectedPlayerName = ""
-
--- Funções do sistema de sumimento
-local function findPlayerByName(name)
-    name = string.lower(name)
-    for _, player in ipairs(Players:GetPlayers()) do
-        if string.find(string.lower(player.Name), name) then
-            return player
-        end
-    end
-    return nil
-end
-
-local function sumirJogador(player)
-    if player ~= LocalPlayer and player.Character and player.Character.Parent == workspace then
-        armazenados[player.Name] = player.Character
-        player.Character.Parent = nil
-        return true
-    end
-    return false
-end
-
-local function aparecerJogador(player)
-    if armazenados[player.Name] and armazenados[player.Name] then
-        armazenados[player.Name].Parent = workspace
-        armazenados[player.Name] = nil
-        return true
-    end
-    return false
-end
 
 ImunesTab:AddSection({ Name = "Scripts de Proteção Linux Hub" })
 
@@ -93,7 +60,9 @@ ImunesTab:AddButton({
     end
 })
 
+
 ImunesTab:AddSection({ Name = "Anti Flings" })
+
 
 ImunesTab:AddToggle({
     Name = "Anti Fling Veículos",
@@ -124,6 +93,7 @@ ImunesTab:AddToggle({
     end
 })
 
+
 ImunesTab:AddToggle({
     Name = " Anti Canoe Fling",
     Default = false,
@@ -148,6 +118,7 @@ ImunesTab:AddToggle({
         end
     end
 })
+
 
 ImunesTab:AddToggle({
     Name = "Anti Fling Jets",
@@ -174,6 +145,7 @@ ImunesTab:AddToggle({
     end
 })
 
+
 ImunesTab:AddToggle({
     Name = " Anti Fling Helicópteros",
     Default = false,
@@ -196,6 +168,7 @@ ImunesTab:AddToggle({
     end
 })
 
+
 ImunesTab:AddToggle({
     Name = "Anti Fling Ball",
     Default = false,
@@ -217,6 +190,7 @@ ImunesTab:AddToggle({
         end
     end
 })
+
 
 ImunesTab:AddSection({ Name = "Anti Sit & Anti Lag & Anti Fling Porta" })
 
@@ -248,11 +222,13 @@ ImunesTab:AddToggle({
     end
 })
 
+
 ImunesTab:AddToggle({
     Name = "Anti-Lag (Todas Tools)",
     Description = "Ativa ou desativa a deduplicação de todas as ferramentas",
     Default = false,
     Callback = function(state)
+        local Players = game:GetService("Players")
         local dedupLock = {}
         local IGNORED_PLAYER -- jogador que executou
 
@@ -364,6 +340,7 @@ ImunesTab:AddToggle({
     end
 })
 
+
 ImunesTab:AddToggle({
     Name = "Anti Fling Porta",
     Description = "Ativa ou desativa a destruição de todas as portas do mapa",
@@ -436,201 +413,6 @@ ImunesTab:AddToggle({
     end
 })
 
--- Sistema de Sumimento de Jogadores
-ImunesTab:AddSection({ Name = "Sistema de Sumimento de Jogadores" })
-
-ImunesTab:AddButton({
-    Name = "Selecionar Jogador para Sumir",
-    Callback = function()
-        -- Cria lista de jogadores online
-        local playerList = {}
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer then
-                table.insert(playerList, player.Name)
-            end
-        end
-        
-        if #playerList == 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ❌",
-                Text = "Não há outros jogadores online!",
-                Duration = 3
-            })
-            return
-        end
-        
-        -- Mostra lista de jogadores (simulado - você pode digitar o nome)
-        local playerName = playerList[math.random(#playerList)] -- Exemplo: pega um aleatório
-        -- Em um hub real, você teria um dropdown ou input
-        
-        selectedPlayerName = playerName
-        local player = findPlayerByName(playerName)
-        if player then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ✅",
-                Text = "Jogador selecionado: " .. player.Name,
-                Duration = 3
-            })
-        end
-    end
-})
-
-ImunesTab:AddButton({
-    Name = "Fazer Jogador Selecionado Sumir",
-    Callback = function()
-        if selectedPlayerName == "" then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ❌",
-                Text = "Selecione um jogador primeiro!",
-                Duration = 3
-            })
-            return
-        end
-        
-        local player = findPlayerByName(selectedPlayerName)
-        if player then
-            if armazenados[player.Name] then
-                StarterGui:SetCore("SendNotification", {
-                    Title = "Linux Hub ⚠️",
-                    Text = player.Name .. " já está sumido!",
-                    Duration = 3
-                })
-            else
-                local success = sumirJogador(player)
-                if success then
-                    StarterGui:SetCore("SendNotification", {
-                        Title = "Linux Hub 🫥",
-                        Text = "SUMIU: " .. player.Name,
-                        Duration = 3
-                    })
-                else
-                    StarterGui:SetCore("SendNotification", {
-                        Title = "Linux Hub ❌",
-                        Text = "Não foi possível sumir " .. player.Name,
-                        Duration = 3
-                    })
-                end
-            end
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ❌",
-                Text = "Jogador não encontrado!",
-                Duration = 3
-            })
-        end
-    end
-})
-
-ImunesTab:AddButton({
-    Name = "Fazer Jogador Selecionado Aparecer",
-    Callback = function()
-        if selectedPlayerName == "" then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ❌",
-                Text = "Selecione um jogador primeiro!",
-                Duration = 3
-            })
-            return
-        end
-        
-        local player = findPlayerByName(selectedPlayerName)
-        if player then
-            if armazenados[player.Name] then
-                local success = aparecerJogador(player)
-                if success then
-                    StarterGui:SetCore("SendNotification", {
-                        Title = "Linux Hub 👁️",
-                        Text = "APARECEU: " .. player.Name,
-                        Duration = 3
-                    })
-                else
-                    StarterGui:SetCore("SendNotification", {
-                        Title = "Linux Hub ❌",
-                        Text = "Erro ao fazer " .. player.Name .. " aparecer",
-                        Duration = 3
-                    })
-                end
-            else
-                StarterGui:SetCore("SendNotification", {
-                    Title = "Linux Hub ⚠️",
-                    Text = player.Name .. " não está sumido!",
-                    Duration = 3
-                })
-            end
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ❌",
-                Text = "Jogador não encontrado!",
-                Duration = 3
-            })
-        end
-    end
-})
-
-ImunesTab:AddButton({
-    Name = "Fazer Todos Jogadores Aparecerem",
-    Callback = function()
-        local count = 0
-        for nome, character in pairs(armazenados) do
-            if Players:FindFirstChild(nome) and character then
-                character.Parent = workspace
-                count = count + 1
-            end
-        end
-        armazenados = {}
-        
-        if count > 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub 👁️",
-                Text = "TODOS APARECERAM: " .. count .. " jogador(es)",
-                Duration = 4
-            })
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub ⚠️",
-                Text = "Nenhum jogador estava sumido!",
-                Duration = 3
-            })
-        end
-    end
-})
-
-ImunesTab:AddButton({
-    Name = "Listar Jogadores Sumidos",
-    Callback = function()
-        local count = 0
-        local names = {}
-        
-        for nome, _ in pairs(armazenados) do
-            if Players:FindFirstChild(nome) then
-                count = count + 1
-                table.insert(names, nome)
-            end
-        end
-        
-        if count > 0 then
-            local list = table.concat(names, ", ")
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub 📋",
-                Text = count .. " sumido(s): " .. list,
-                Duration = 5
-            })
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "Linux Hub 📋",
-                Text = "Nenhum jogador está sumido!",
-                Duration = 3
-            })
-        end
-    end
-})
-
--- Limpeza automática quando jogadores saem do servidor
-Players.PlayerRemoving:Connect(function(player)
-    if armazenados[player.Name] then
-        armazenados[player.Name] = nil
-    end
-end)
 
 local TrollTab = Window:MakeTab({ Title = "Scripts Trolls", Icon = "rbxassetid://13364900349" })
 
