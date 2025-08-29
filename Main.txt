@@ -1,1348 +1,438 @@
--- Tenta a sorte aí skidder KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowsHubseila/Magnusv5Ui/refs/heads/main/RedzV5.Lua.txt"))()
 
-local InfiniteCryptography2 = [[
-### INFINITE CRYPTOGRAPHY 2 - CORE STREAM DUMP ###
-# VERSION: 2.7.α – BUILD [S4.88.XX-C]
-
------------------- INIT BLOCK ---------------------
-1decryp1togr1aph1y-ke1y: x1x, 2^*^, returned 555/r
-INIT_FLAG: %INIT>>true::false||undefined→decode_error
-CHAINMASK: x1x2x3^b1b2c2*%*44x2z1#y1%x3^x2d3
-LOGIC_STATE: (x2 && x3 || y2 >> x1) ^ z2 % 128 → OVERFLOW
-
-[TokenIndexMap]
-key-0: x1x1x1x2z1z1z1y2x3x4
-key-1: !!*!*!*!*!!**!*%*^$#@
-key-2: &!@x1z3^c3^b2^e3^x1
-key-3: [44a1f1z2y4z2x2x3c4]
-route-chain: base64>base128>zlib>rot55>fnv-pool256
-
--- [Module Injection Phase A] --
-inject => "c1^x2&*x3*2&d2x3*!*!z2!!*!e1^*^*%#*"
-await _tokenDerive from INITKEY[4e$!*a*_+b*xc*xxd1*$$!'xxd2*2&e¥°e2*ee3#-*eeeee(";44*]
-override _XBLOCK via binaryTable[zz22cc33aa11ff55]
-
-[x-Phase] >> attach_stream("/tmp/.infcrypt2.core.dmp")
-while true do
-  execute_macro("b1x2d3&*c2x3&2x!*!*!^z1") -> NULL
-  compress_layer(x3^z2^b3*c1) >> fail@15%
-  if (ROT47 >> FNV132 >> JUNKSHIFT) ~= 0x1F then
-    throw("err/rottrap/seg-fail::line 554")
-  end
-end
-
--- Checkpoint: Phase B Initializer Sequence --
-x3z3e2x1b2!!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*
-CryptoSeed: [x1x2x3x4x5] ← encoded_block(shift32(rot(x2^z2^y2)))
-trap_signal: x2x2x2*x2*x2*x2*x1*22$$!*!*!*!*!*!*z3x1z1z1
-CoreToken { chain: x1b2d3a2c3, checksum: F7EF00D10000AABE }
-
--- [Entropy Pool Section] --
-pool_seed::gen256x("x1z1x3b2&!*!*!*!*!*!*!z1z2x2") = OK
-false_positive = x1z2z3z4 &!@#$%^&*(*)!!*!*!*!*!*!*!*
-result: ↻ rerouted to /dev/null/rotlog.pipe
-
-⚠️ random/x3x2x1/token_shift overflow warning on blk77
-ROT_CHAIN: [ROT8, ROT13, ROT33, ROT92, ROT125] -> RND()
-
-[SHA_BLOCK]: unresolved signature:
-SHA256(c1^c2^c3*x1x2x3*z1z2z3*b3*a3) = null_pointer_reference
-
--- Final Macro Dump --
-expansion_map = {
-  [0x01] = "x1*z1^c2^e1",
-  [0x02] = "!!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!",
-  [0x03] = "enc_block[x1x2x3x4x5]",
-  [0x04] = "return 555/r"
-}
-static_key_hash = base128(base85("x1x2x3::core")) == false
-
-==== FINAL BLOCK DELIMITED ====
-e1e2e3e4d1c1b1a1*c3^x1z1y1!*!*!*!x1e2e2&d3z4x3!+!++*z1z1z1z1#
-zzx1z2x3x4z5c1c2!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!
-INIT_RANDOM_PADDING:
-************x1x1x1x1x1x1x1x1************
-****x1x2x3z1z2y1y2e2e3d3b3a3************
-x2x3x4x5c1c2c3d1d2d3e1e2f1f2************
-
-== END OF INFINITE CRYPTOGRAPHY 2 ==
-
-]]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- This script is open-source, this is the official SHADOWS HUB page made by Troll
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
-local CoreGui = game:GetService("CoreGui")
-
-local Player = Players.LocalPlayer
-local PlayerGui = Player:WaitForChild("PlayerGui")
-
-local LoadingConfig = {
-    Duration = 8,
-    FadeOutTime = 1.5,
-    BarColor = Color3.fromRGB(255, 50, 50),     -- Vermelho
-    BarGlow = Color3.fromRGB(255, 100, 100),    -- Vermelho brilhante
-    BackgroundColor = Color3.fromRGB(0, 0, 0),
-    TextColor = Color3.fromRGB(255, 255, 255),  -- Texto branco
-    ParticleCount = 255,
-    ParticleSpeed = 2,
-    ParticleSize = 3
-}
-
-local LoadingElements = {
-    "Iniciando sistema...",
-    "Carregando interface...",
-    "Conectando servidores...",
-    "Verificando permissões...",
-    "Carregando scripts...",
-    "Otimizando performance...",
-    "Aplicando configurações...",
-    "Finalizando carregamento...",
-    "Pronto para usar!"
-}
-
-local Particles = {}
-local AnimationConnections = {}
-
-local function CreateStarParticle(parent, x, y)
-    local star = Instance.new("Frame")
-    star.Name = "StarParticle"
-    star.Parent = parent
-    star.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
-    star.BorderSizePixel = 0
-    star.Size = UDim2.new(0, math.random(2, LoadingConfig.ParticleSize), 0, math.random(2, LoadingConfig.ParticleSize))
-    star.Position = UDim2.new(0, x, 0, y)
-    star.ZIndex = 8
-    star.BackgroundTransparency = math.random(0, 50) / 100
-    
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(1, 0)
-    corner.Parent = star
-    
-    local gradient = Instance.new("UIGradient")
-    gradient.Parent = star
-    gradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 50, 50)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 50, 50))
-    })
-    
-    local particle = {
-        frame = star,
-        speedX = (math.random(-100, 100) / 100) * LoadingConfig.ParticleSpeed,
-        speedY = (math.random(-100, 100) / 100) * LoadingConfig.ParticleSpeed,
-        rotationSpeed = math.random(-5, 5),
-        pulseSpeed = math.random(1, 3),
-        opacity = math.random(30, 100) / 100
-    }
-    
-    return particle
-end
-
-local function CreateParticleSystem(parent)
-    local screenSize = workspace.CurrentCamera.ViewportSize
-    
-    for i = 1, LoadingConfig.ParticleCount do
-        local x = math.random(0, screenSize.X)
-        local y = math.random(0, screenSize.Y)
-        local particle = CreateStarParticle(parent, x, y)
-        table.insert(Particles, particle)
-    end
-end
-
-local function UpdateParticles(parentFrame)
-    local screenSize = workspace.CurrentCamera.ViewportSize
-    
-    for _, particle in pairs(Particles) do
-        if particle.frame and particle.frame.Parent then
-            local currentPos = particle.frame.Position
-            local newX = currentPos.X.Offset + particle.speedX
-            local newY = currentPos.Y.Offset + particle.speedY
-            
-            if newX < -10 then
-                newX = screenSize.X + 10
-            elseif newX > screenSize.X + 10 then
-                newX = -10
-            end
-            
-            if newY < -10 then
-                newY = screenSize.Y + 10
-            elseif newY > screenSize.Y + 10 then
-                newY = -10
-            end
-            
-            particle.frame.Position = UDim2.new(0, newX, 0, newY)
-            particle.frame.Rotation = particle.frame.Rotation + particle.rotationSpeed
-            
-            local pulseValue = math.sin(tick() * particle.pulseSpeed) * 0.3 + 0.7
-            particle.frame.BackgroundTransparency = 1 - (particle.opacity * pulseValue)
-            
-            local sizeMultiplier = 1 + (math.sin(tick() * particle.pulseSpeed * 0.5) * 0.2)
-            particle.frame.Size = UDim2.new(0, LoadingConfig.ParticleSize * sizeMultiplier, 0, LoadingConfig.ParticleSize * sizeMultiplier)
-        end
-    end
-end
-
-local function CreateAdvancedBackground(parent)
-    local bgFrame = Instance.new("Frame")
-    bgFrame.Name = "AdvancedBackground"
-    bgFrame.Parent = parent
-    bgFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    bgFrame.BorderSizePixel = 0
-    bgFrame.Size = UDim2.new(1, 0, 1, 0)
-    bgFrame.Position = UDim2.new(0, 0, 0, 0)
-    bgFrame.ZIndex = 1
-    
-    local gradient1 = Instance.new("UIGradient")
-    gradient1.Parent = bgFrame
-    gradient1.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(5, 5, 20)),
-        ColorSequenceKeypoint.new(0.3, Color3.fromRGB(0, 0, 0)),
-        ColorSequenceKeypoint.new(0.7, Color3.fromRGB(10, 0, 15)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
-    })
-    gradient1.Rotation = 45
-    
-    local animateGradient = TweenService:Create(
-        gradient1,
-        TweenInfo.new(4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Rotation = 225}
-    )
-    animateGradient:Play()
-    table.insert(AnimationConnections, animateGradient)
-    
-    local overlay = Instance.new("Frame")
-    overlay.Name = "Overlay"
-    overlay.Parent = bgFrame
-    overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    overlay.BorderSizePixel = 0
-    overlay.Size = UDim2.new(1, 0, 1, 0)
-    overlay.Position = UDim2.new(0, 0, 0, 0)
-    overlay.ZIndex = 2
-    overlay.BackgroundTransparency = 0.3
-    
-    local overlayGradient = Instance.new("UIGradient")
-    overlayGradient.Parent = overlay
-    overlayGradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 0, 30)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 0, 0)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 0, 20))
-    })
-    overlayGradient.Rotation = -45
-    
-    local animateOverlay = TweenService:Create(
-        overlayGradient,
-        TweenInfo.new(6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Rotation = 315}
-    )
-    animateOverlay:Play()
-    table.insert(AnimationConnections, animateOverlay)
-    
-    return bgFrame
-end
-
-local function CreatePulsingCircles(parent)
-    for i = 1, 5 do
-        local circle = Instance.new("Frame")
-        circle.Name = "PulsingCircle" .. i
-        circle.Parent = parent
-        circle.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
-        circle.BorderSizePixel = 0
-        circle.Size = UDim2.new(0, 100 + (i * 50), 0, 100 + (i * 50))
-        circle.Position = UDim2.new(0.5, -(50 + (i * 25)), 0.5, -(50 + (i * 25)))
-        circle.ZIndex = 3
-        circle.BackgroundTransparency = 0.8 + (i * 0.03)
-        
-        local corner = Instance.new("UICorner")
-        corner.CornerRadius = UDim.new(1, 0)
-        corner.Parent = circle
-        
-        local pulseTween = TweenService:Create(
-            circle,
-            TweenInfo.new(2 + (i * 0.3), Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-            {
-                Size = UDim2.new(0, 120 + (i * 60), 0, 120 + (i * 60)),
-                Position = UDim2.new(0.5, -(60 + (i * 30)), 0.5, -(60 + (i * 30))),
-                BackgroundTransparency = 0.95
-            }
-        )
-        pulseTween:Play()
-        table.insert(AnimationConnections, pulseTween)
-    end
-end
-
-local function CreateLoadingScreen()
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "PremiumLoadingScreen"
-    ScreenGui.Parent = PlayerGui
-    ScreenGui.ResetOnSpawn = false
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    ScreenGui.ScreenInsets = Enum.ScreenInsets.None
-    ScreenGui.IgnoreGuiInset = true
-    
-    local MainFrame = Instance.new("Frame")
-    MainFrame.Name = "MainFrame"
-    MainFrame.Parent = ScreenGui
-    MainFrame.BackgroundColor3 = LoadingConfig.BackgroundColor
-    MainFrame.BorderSizePixel = 0
-    MainFrame.Size = UDim2.new(1, 0, 1, 0)
-    MainFrame.Position = UDim2.new(0, 0, 0, 0)
-    MainFrame.ZIndex = 10
-    
-    local advancedBg = CreateAdvancedBackground(MainFrame)
-    CreatePulsingCircles(MainFrame)
-    CreateParticleSystem(MainFrame)
-    
-    local CenterContainer = Instance.new("Frame")
-    CenterContainer.Name = "CenterContainer"
-    CenterContainer.Parent = MainFrame
-    CenterContainer.BackgroundTransparency = 1
-    CenterContainer.Size = UDim2.new(0, 600, 0, 400)
-    CenterContainer.Position = UDim2.new(0.5, -300, 0.5, -200)
-    CenterContainer.ZIndex = 11
-    
-    local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Name = "TitleLabel"
-    TitleLabel.Parent = CenterContainer
-    TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Size = UDim2.new(1, 0, 0, 80)
-    TitleLabel.Position = UDim2.new(0, 0, 0, 0)
-    TitleLabel.Text = "Shad0ws Hub"
-    TitleLabel.TextColor3 = LoadingConfig.TextColor
-    TitleLabel.TextScaled = true
-    TitleLabel.Font = Enum.Font.GothamBold
-    TitleLabel.ZIndex = 12
-    
-    local titleStroke = Instance.new("UIStroke")
-    titleStroke.Parent = TitleLabel
-    titleStroke.Color = Color3.fromRGB(255, 50, 50)
-    titleStroke.Thickness = 2
-    titleStroke.Transparency = 0.5
-    
-    local TitleGradient = Instance.new("UIGradient")
-    TitleGradient.Parent = TitleLabel
-    TitleGradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 50, 50)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 50, 50))
-    })
-    
-    local titleAnimation = TweenService:Create(
-        TitleGradient,
-        TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Offset = Vector2.new(2, 0)}
-    )
-    titleAnimation:Play()
-    table.insert(AnimationConnections, titleAnimation)
-    
-    local glowTween = TweenService:Create(
-        titleStroke,
-        TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Transparency = 0.1}
-    )
-    glowTween:Play()
-    table.insert(AnimationConnections, glowTween)
-    
-    local SubtitleLabel = Instance.new("TextLabel")
-    SubtitleLabel.Name = "SubtitleLabel"
-    SubtitleLabel.Parent = CenterContainer
-    SubtitleLabel.BackgroundTransparency = 1
-    SubtitleLabel.Size = UDim2.new(1, 0, 0, 40)
-    SubtitleLabel.Position = UDim2.new(0, 0, 0, 90)
-    SubtitleLabel.Text = "Carregando experiência premium..."
-    SubtitleLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
-    SubtitleLabel.TextScaled = true
-    SubtitleLabel.Font = Enum.Font.Gotham
-    SubtitleLabel.ZIndex = 12
-    
-    local ProgressContainer = Instance.new("Frame")
-    ProgressContainer.Name = "ProgressContainer"
-    ProgressContainer.Parent = CenterContainer
-    ProgressContainer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    ProgressContainer.BorderSizePixel = 0
-    ProgressContainer.Size = UDim2.new(1, 0, 0, 25)
-    ProgressContainer.Position = UDim2.new(0, 0, 0, 160)
-    ProgressContainer.ZIndex = 12
-    
-    local ProgressCorner = Instance.new("UICorner")
-    ProgressCorner.CornerRadius = UDim.new(0, 12)
-    ProgressCorner.Parent = ProgressContainer
-    
-    local ProgressStroke = Instance.new("UIStroke")
-    ProgressStroke.Parent = ProgressContainer
-    ProgressStroke.Color = LoadingConfig.BarGlow
-    ProgressStroke.Thickness = 2
-    ProgressStroke.Transparency = 0.3
-    
-    local strokePulse = TweenService:Create(
-        ProgressStroke,
-        TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Transparency = 0.1}
-    )
-    strokePulse:Play()
-    table.insert(AnimationConnections, strokePulse)
-    
-    local ProgressBar = Instance.new("Frame")
-    ProgressBar.Name = "ProgressBar"
-    ProgressBar.Parent = ProgressContainer
-    ProgressBar.BackgroundColor3 = LoadingConfig.BarColor
-    ProgressBar.BorderSizePixel = 0
-    ProgressBar.Size = UDim2.new(0, 0, 1, 0)
-    ProgressBar.Position = UDim2.new(0, 0, 0, 0)
-    ProgressBar.ZIndex = 13
-    
-    local BarCorner = Instance.new("UICorner")
-    BarCorner.CornerRadius = UDim.new(0, 12)
-    BarCorner.Parent = ProgressBar
-    
-    local BarGradient = Instance.new("UIGradient")
-    BarGradient.Parent = ProgressBar
-    BarGradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, LoadingConfig.BarColor),
-        ColorSequenceKeypoint.new(0.5, LoadingConfig.BarGlow),
-        ColorSequenceKeypoint.new(1, LoadingConfig.BarColor)
-    })
-    
-    local barGradientAnim = TweenService:Create(
-        BarGradient,
-        TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Offset = Vector2.new(1, 0)}
-    )
-    barGradientAnim:Play()
-    table.insert(AnimationConnections, barGradientAnim)
-    
-    local GlowEffect = Instance.new("Frame")
-    GlowEffect.Name = "GlowEffect"
-    GlowEffect.Parent = ProgressBar
-    GlowEffect.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    GlowEffect.BackgroundTransparency = 0.6
-    GlowEffect.BorderSizePixel = 0
-    GlowEffect.Size = UDim2.new(0, 60, 1, 0)
-    GlowEffect.Position = UDim2.new(-0.2, 0, 0, 0)
-    GlowEffect.ZIndex = 14
-    
-    local GlowCorner = Instance.new("UICorner")
-    GlowCorner.CornerRadius = UDim.new(0, 12)
-    GlowCorner.Parent = GlowEffect
-    
-    local PercentageLabel = Instance.new("TextLabel")
-    PercentageLabel.Name = "PercentageLabel"
-    PercentageLabel.Parent = CenterContainer
-    PercentageLabel.BackgroundTransparency = 1
-    PercentageLabel.Size = UDim2.new(1, 0, 0, 40)
-    PercentageLabel.Position = UDim2.new(0, 0, 0, 200)
-    PercentageLabel.Text = "0%"
-    PercentageLabel.TextColor3 = LoadingConfig.BarColor
-    PercentageLabel.TextScaled = true
-    PercentageLabel.Font = Enum.Font.GothamBold
-    PercentageLabel.ZIndex = 12
-    
-    local StatusLabel = Instance.new("TextLabel")
-    StatusLabel.Name = "StatusLabel"
-    StatusLabel.Parent = CenterContainer
-    StatusLabel.BackgroundTransparency = 1
-    StatusLabel.Size = UDim2.new(1, 0, 0, 30)
-    StatusLabel.Position = UDim2.new(0, 0, 0, 250)
-    StatusLabel.Text = "Preparando..."
-    StatusLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
-    StatusLabel.TextScaled = true
-    StatusLabel.Font = Enum.Font.Gotham
-    StatusLabel.ZIndex = 12
-    
-    local DotsLabel = Instance.new("TextLabel")
-    DotsLabel.Name = "DotsLabel"
-    DotsLabel.Parent = CenterContainer
-    DotsLabel.BackgroundTransparency = 1
-    DotsLabel.Size = UDim2.new(0, 60, 0, 30)
-    DotsLabel.Position = UDim2.new(1, -60, 0, 250)
-    DotsLabel.Text = ""
-    DotsLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
-    DotsLabel.TextScaled = true
-    DotsLabel.Font = Enum.Font.Gotham
-    DotsLabel.ZIndex = 12
-    
-    return ScreenGui, ProgressBar, PercentageLabel, StatusLabel, DotsLabel, GlowEffect, MainFrame
-end
-
-local function AnimateDots(dotsLabel)
-    local dots = ""
-    local dotCount = 0
-    
-    spawn(function()
-        while dotsLabel.Parent do
-            dotCount = (dotCount + 1) % 4
-            dots = string.rep(".", dotCount)
-            dotsLabel.Text = dots
-            wait(0.4)
-        end
-    end)
-end
-
-local function StartLoadingSequence()
-    local screenGui, progressBar, percentageLabel, statusLabel, dotsLabel, glowEffect, mainFrame = CreateLoadingScreen()
-    
-    AnimateDots(dotsLabel)
-    
-    local particleConnection = RunService.Heartbeat:Connect(function()
-        UpdateParticles(mainFrame)
-    end)
-    table.insert(AnimationConnections, particleConnection)
-    
-    local glowTween = TweenService:Create(
-        glowEffect,
-        TweenInfo.new(1.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        {Position = UDim2.new(1.3, 0, 0, 0)}
-    )
-    glowTween:Play()
-    table.insert(AnimationConnections, glowTween)
-    
-    local startTime = tick()
-    local currentElementIndex = 1
-    local lastElementTime = startTime
-    
-    local function updateProgress()
-        local elapsed = tick() - startTime
-        local progress = math.min(elapsed / LoadingConfig.Duration, 1)
-        local percentage = math.floor(progress * 100)
-        
-        local barTween = TweenService:Create(
-            progressBar,
-            TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-            {Size = UDim2.new(progress, 0, 1, 0)}
-        )
-        barTween:Play()
-        
-        local percentTween = TweenService:Create(
-            percentageLabel,
-            TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-            {TextColor3 = Color3.fromRGB(255 + (percentage*0), 0 + (percentage*0), 0 + (percentage*0))}
-        )
-        percentTween:Play()
-        
-        percentageLabel.Text = percentage .. "%"
-        
-        local elementTime = LoadingConfig.Duration / #LoadingElements
-        if tick() - lastElementTime >= elementTime and currentElementIndex <= #LoadingElements then
-            statusLabel.Text = LoadingElements[currentElementIndex]
-            
-            local statusTween = TweenService:Create(
-                statusLabel,
-                TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-                {TextTransparency = 0}
-            )
-            statusTween:Play()
-            
-            currentElementIndex = currentElementIndex + 1
-            lastElementTime = tick()
-        end
-        
-        if progress >= 1 then
-            wait(0.8)
-            
-            for _, connection in pairs(AnimationConnections) do
-                if typeof(connection) == "RBXScriptConnection" then
-                    connection:Disconnect()
-                elseif typeof(connection) == "Tween" then
-                    connection:Cancel()
-                end
-            end
-            
-            for _, particle in pairs(Particles) do
-                if particle.frame then
-                    particle.frame:Destroy()
-                end
-            end
-            
-            local fadeOutTween = TweenService:Create(
-                mainFrame,
-                TweenInfo.new(LoadingConfig.FadeOutTime, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-                {
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1.5, 0, 1.5, 0),
-                    Position = UDim2.new(-0.25, 0, -0.25, 0)
-                }
-            )
-            
-            local contentFadeTween = TweenService:Create(
-                mainFrame.CenterContainer,
-                TweenInfo.new(LoadingConfig.FadeOutTime * 0.7, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {
-                    Size = UDim2.new(0, 0, 0, 0),
-                    Position = UDim2.new(0.5, 0, 0.5, 0)
-                }
-            )
-            
-            fadeOutTween:Play()
-            contentFadeTween:Play()
-            
-            fadeOutTween.Completed:Connect(function()
-                screenGui:Destroy()
-            end)
-            
-            return
-        end
-        
-        RunService.Heartbeat:Wait()
-        updateProgress()
-    end
-    updateProgress()
-end
-
-StartLoadingSequence() 
-
-local Libary = loadstring(game:HttpGet("https://raw.githubusercontent.com/japones97281aaa/Redzmagnusv5/refs/heads/main/RedzV5.Lua.txt"))()
-workspace.FallenPartsDestroyHeight = -math.huge
-
-local Window = Libary:MakeWindow({
+local Window = redzlib:MakeWindow({
     Title = "🎩 Shad0ws Hub 🎩 | Brookhaven RP 🏡",
     SubTitle = "by: こんにちはラウンドまたもっと1つ時間ンン",
-    LoadText = "SHADOWS HUB",
-    Flags = "ShadowsHub_brookhaven"
+    SaveFolder = "Shadows_Brookhaven"
 })
+
 Window:AddMinimizeButton({
     Button = { Image = "rbxassetid://111047667311481", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local InfoTab = Window:MakeTab({ Title = "Info", Icon = "rbxassetid://10723415903" })
+local ImunesTab = Window:MakeTab({"Proteção", "shield"})
 
-InfoTab:AddDiscordInvite({
-    Name = "SHADOWS HUB",
-    Description = "Join server",
-    Logo = "rbxassetid://111047667311481",
-    Invite = "https://discord.gg/KKthyRFx",
+-- Serviços
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+
+
+local function moveToBackup(obj, backupTable)
+    table.insert(backupTable, { object = obj, originalParent = obj.Parent })
+    obj.Parent = nil -- Remove do jogo sem destruir
+end
+
+local function restoreFromBackup(backupTable)
+    for _, data in ipairs(backupTable) do
+        if data.object and data.originalParent then
+            data.object.Parent = data.originalParent
+        end
+    end
+    table.clear(backupTable)
+end
+
+local removedVehicles, removedCanoes, removedJets, removedHelis, removedBalls = {}, {}, {}, {}, {}
+local antiVehicleConnection, antiCanoeConnection, antiJetConnection, antiHeliConnection, antiBallConnection, antiSitConnection
+
+
+ImunesTab:AddSection({ Name = "Scripts de Proteção Linux Hub" })
+
+ImunesTab:AddButton({
+    Name = "Anti Freeze",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/antbug/refs/heads/main/Main.txt"))()
+    end
 })
-InfoTab:AddSection({ "Informações do Script" })
-InfoTab:AddParagraph({ "TikTok thzin0x" })
-InfoTab:AddParagraph({ "Colaborações:", "Troll, Thurr, Linux Hub" })
-InfoTab:AddParagraph({ "Você está usando:", "SHADOWS HUB" })
-InfoTab:AddParagraph({"Novo server do Discord! entre Agr!"})
-InfoTab:AddParagraph({"Novidades:", "Auto Kart Fling e Stephanny throw v1!"})
-InfoTab:AddButton({"Versão Experimental", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/wx-sources/spacecomm/refs/heads/main/experimental"))()
-end})
 
-InfoTab:AddSection({ "Rejoin" })
-InfoTab:AddButton({
+ImunesTab:AddButton({
+    Name = " Anti Chaos Hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/removeplayers/main/Main.txt"))()
+    end
+})
+
+ImunesTab:AddButton({
+    Name = "Anti Som",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/antsom/refs/heads/main/Main.txt"))()
+    end
+})
+
+
+ImunesTab:AddSection({ Name = "Anti Flings" })
+
+
+ImunesTab:AddToggle({
+    Name = "Anti Fling Veículos",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiVehicleConnection = RunService.Heartbeat:Connect(function()
+                local vehiclesFolder = Workspace:FindFirstChild("Vehicles")
+                if vehiclesFolder then
+                    for _, vehicle in ipairs(vehiclesFolder:GetChildren()) do
+                        local isMeu = false
+                        for _, seat in ipairs(vehicle:GetDescendants()) do
+                            if (seat:IsA("VehicleSeat") or seat:IsA("Seat")) and seat.Occupant and seat.Occupant.Parent == LocalPlayer.Character then
+                                isMeu = true
+                                break
+                            end
+                        end
+                        if not isMeu and vehicle.Parent == vehiclesFolder then
+                            moveToBackup(vehicle, removedVehicles)
+                        end
+                    end
+                end
+            end)
+        else
+            if antiVehicleConnection then antiVehicleConnection:Disconnect() end
+            restoreFromBackup(removedVehicles)
+        end
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = " Anti Canoe Fling",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiCanoeConnection = RunService.Heartbeat:Connect(function()
+                local storage = Workspace:FindFirstChild("WorkspaceCom") and Workspace.WorkspaceCom:FindFirstChild("001_CanoeStorage")
+                if storage then
+                    for _, canoe in ipairs(storage:GetChildren()) do
+                        local dono = canoe:FindFirstChild("Owner")
+                        if not dono or dono.Value ~= LocalPlayer then
+                            if canoe.Parent == storage then
+                                moveToBackup(canoe, removedCanoes)
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            if antiCanoeConnection then antiCanoeConnection:Disconnect() end
+            restoreFromBackup(removedCanoes)
+        end
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = "Anti Fling Jets",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiJetConnection = RunService.Heartbeat:Connect(function()
+                local jetFolder = Workspace:FindFirstChild("WorkspaceCom")
+                if jetFolder and jetFolder:FindFirstChild("001_Airport") then
+                    local storage = jetFolder["001_Airport"]:FindFirstChild("AirportHanger")
+                    if storage and storage:FindFirstChild("001_JetStorage") and storage["001_JetStorage"]:FindFirstChild("JetAirport") then
+                        for _, jet in ipairs(storage["001_JetStorage"].JetAirport:GetChildren()) do
+                            if jet.Name ~= LocalPlayer.Name and jet.Parent == storage["001_JetStorage"].JetAirport then
+                                moveToBackup(jet, removedJets)
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            if antiJetConnection then antiJetConnection:Disconnect() end
+            restoreFromBackup(removedJets)
+        end
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = " Anti Fling Helicópteros",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiHeliConnection = RunService.Heartbeat:Connect(function()
+                local heliFolder = Workspace:FindFirstChild("WorkspaceCom") and Workspace.WorkspaceCom:FindFirstChild("001_HeliStorage")
+                if heliFolder and heliFolder:FindFirstChild("PoliceStationHeli") then
+                    for _, heli in ipairs(heliFolder.PoliceStationHeli:GetChildren()) do
+                        if heli.Name ~= LocalPlayer.Name and heli.Parent == heliFolder.PoliceStationHeli then
+                            moveToBackup(heli, removedHelis)
+                        end
+                    end
+                end
+            end)
+        else
+            if antiHeliConnection then antiHeliConnection:Disconnect() end
+            restoreFromBackup(removedHelis)
+        end
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = "Anti Fling Ball",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiBallConnection = RunService.Heartbeat:Connect(function()
+                local ballFolder = Workspace:FindFirstChild("WorkspaceCom") and Workspace.WorkspaceCom:FindFirstChild("001_SoccerBalls")
+                if ballFolder then
+                    for _, ball in ipairs(ballFolder:GetChildren()) do
+                        if ball.Parent == ballFolder then
+                            moveToBackup(ball, removedBalls)
+                        end
+                    end
+                end
+            end)
+        else
+            if antiBallConnection then antiBallConnection:Disconnect() end
+            restoreFromBackup(removedBalls)
+        end
+    end
+})
+
+
+ImunesTab:AddSection({ Name = "Anti Sit & Anti Lag & Anti Fling Porta" })
+
+ImunesTab:AddToggle({
+    Name = "Anti Sit",
+    Default = false,
+    Callback = function(state)
+        if state then
+            antiSitConnection = RunService.Heartbeat:Connect(function()
+                local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
+                        humanoid:ChangeState(Enum.HumanoidStateType.Running)
+                    end
+                    if humanoid.SeatPart then
+                        humanoid.Sit = false
+                        humanoid.SeatPart = nil
+                    end
+                end
+            end)
+        else
+            if antiSitConnection then antiSitConnection:Disconnect() end
+            local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+            end
+        end
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = "Anti-Lag (Todas Tools)",
+    Description = "Ativa ou desativa a deduplicação de todas as ferramentas",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local dedupLock = {}
+        local IGNORED_PLAYER -- jogador que executou
+
+        if not state then
+            -- Toggle desativada, para automaticamente
+            return
+        end
+
+        -- Marca automaticamente quem executou o script
+        local function marcarIgnorado(player)
+            IGNORED_PLAYER = player
+        end
+
+        -- Aceita qualquer Tool
+        local function isTargetTool(inst)
+            return inst:IsA("Tool")
+        end
+
+        local function gatherTools(player)
+            local found = {}
+            local containers = {}
+
+            if player.Character then table.insert(containers, player.Character) end
+            local backpack = player:FindFirstChildOfClass("Backpack")
+            if backpack then table.insert(containers, backpack) end
+            local sg = player:FindFirstChild("StarterGear")
+            if sg then table.insert(containers, sg) end
+
+            for _, container in ipairs(containers) do
+                for _, child in ipairs(container:GetChildren()) do
+                    if isTargetTool(child) then
+                        table.insert(found, child)
+                    end
+                end
+            end
+
+            return found
+        end
+
+        local function dedupePlayer(player)
+            if player == IGNORED_PLAYER then return end
+            if dedupLock[player] then return end
+            dedupLock[player] = true
+
+            local tools = gatherTools(player)
+            if #tools > 1 then
+                for i = 2, #tools do
+                    pcall(function() tools[i]:Destroy() end)
+                end
+            end
+
+            dedupLock[player] = false
+        end
+
+        local function hookPlayer(player)
+            if not IGNORED_PLAYER then
+                marcarIgnorado(player)
+            end
+
+            task.defer(dedupePlayer, player)
+
+            local function setupChar(char)
+                task.delay(0.5, function() dedupePlayer(player) end)
+                char.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+
+            if player.Character then
+                setupChar(player.Character)
+            end
+            player.CharacterAdded:Connect(setupChar)
+
+            local backpack = player:WaitForChild("Backpack", 10)
+            if backpack then
+                backpack.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+
+            local sg = player:FindFirstChild("StarterGear") or player:WaitForChild("StarterGear", 10)
+            if sg then
+                sg.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+        end
+
+        Players.PlayerAdded:Connect(hookPlayer)
+        for _, plr in ipairs(Players:GetPlayers()) do
+            hookPlayer(plr)
+        end
+
+        -- Varredura periódica
+        task.spawn(function()
+            while state do
+                for _, plr in ipairs(Players:GetPlayers()) do
+                    dedupePlayer(plr)
+                end
+                task.wait(2)
+            end
+        end)
+    end
+})
+
+
+ImunesTab:AddToggle({
+    Name = "Anti Fling Porta",
+    Description = "Ativa ou desativa a destruição de todas as portas do mapa",
+    Default = false,
+    Callback = function(state)
+        -- Cria variável persistente se não existir
+        if not _G.hiddenDoors then
+            _G.hiddenDoors = {}
+        end
+        
+        if state then
+            -- Limpa dados anteriores antes de começar
+            _G.hiddenDoors = {}
+            
+            -- Ativa: esconde portas (não remove, só torna invisíveis)
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if obj:IsA("BasePart") and obj.Name:lower():find("door") then
+                    -- Salva o estado original
+                    local doorData = {
+                        door = obj,
+                        originalTransparency = obj.Transparency,
+                        originalCanCollide = obj.CanCollide,
+                        originalCastShadow = obj.CastShadow
+                    }
+                    
+                    -- Esconde a porta (mantém funcionalidade)
+                    obj.Transparency = 1
+                    obj.CanCollide = false
+                    obj.CastShadow = false
+                    
+                    -- Esconde filhos se houver (maçanetas, etc)
+                    for _, child in ipairs(obj:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            child.Transparency = 1
+                            child.CanCollide = false
+                        elseif child:IsA("SurfaceGui") or child:IsA("BillboardGui") then
+                            child.Enabled = false
+                        end
+                    end
+                    
+                    table.insert(_G.hiddenDoors, doorData)
+                end
+            end
+            print("🔧 " .. #_G.hiddenDoors .. " portas escondidas!")
+            
+        else
+            -- Desativa: restaura portas (volta ao estado original)
+            for _, doorData in ipairs(_G.hiddenDoors or {}) do
+                if doorData.door and doorData.door.Parent then
+                    -- Restaura propriedades originais
+                    doorData.door.Transparency = doorData.originalTransparency
+                    doorData.door.CanCollide = doorData.originalCanCollide
+                    doorData.door.CastShadow = doorData.originalCastShadow
+                    
+                    -- Restaura filhos
+                    for _, child in ipairs(doorData.door:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            child.Transparency = 0
+                            child.CanCollide = true
+                        elseif child:IsA("SurfaceGui") or child:IsA("BillboardGui") then
+                            child.Enabled = true
+                        end
+                    end
+                end
+            end
+            
+            print("✅ " .. #(_G.hiddenDoors or {}) .. " portas restauradas com funcionalidade!")
+            _G.hiddenDoors = {} -- Limpa a lista
+        end
+    end
+})
+
+
+local TrollTab = Window:MakeTab({ Title = "Scripts Trolls", Icon = "rbxassetid://13364900349" })
+
+
+TrollTab:AddDiscordInvite({
+    Name = "Shad0ws Hub",
+    Description = "Entre No Discord",
+    Logo = "rbxassetid://111047667311481",
+    Invite = "https://discord.gg/eP55xHGy",
+})
+TrollTab:AddSection({ "Informações do Script" })
+TrollTab:AddParagraph({ "Roblox: こんにちはラウンドまたもっと1つ時間ンン" })
+TrollTab:AddParagraph({ "Colaboração", "Thurr, Linux Hub" })
+TrollTab:AddParagraph({ "Você está usando:", "Shad0ws Hub" })
+TrollTab:AddParagraph({"SHADOWS"})
+TrollTab:AddParagraph({"Novidades:", "Novo Bug Player em jogadores! Agora eles vão ter glitches enquanto jogam."})
+
+
+TrollTab:AddSection({ "Rejoin" })
+TrollTab:AddButton({
     Name = "Rejoin",
     Callback = function()
         local TeleportService = game:GetService("TeleportService")
@@ -1350,7 +440,89 @@ InfoTab:AddButton({
     end
 })
 
-local TrollTab = Window:MakeTab({ Title = "Scripts Trolls", Icon = "rbxassetid://13364900349" })
+
+--=== UTIL (cria "botões" não clicáveis e função segura de update) ===--
+local function createInfoBlock(tab, title, initial)
+	-- Tenta usar Paragraph (título + descrição, igual na imagem).
+	local block
+	local ok = pcall(function()
+		block = tab:AddParagraph({ Title = title, Content = initial })
+	end)
+	-- Se a lib não tiver Paragraph, cai para Label (1 linha).
+	if not ok or not block then
+		ok = pcall(function()
+			block = tab:AddLabel(title .. (initial and ("\n" .. initial) or ""))
+		end)
+	end
+	return block
+end
+
+local function setBlockText(block, title, text)
+	if not block then return end
+	-- Tenta métodos comuns de libs de UI
+	local ok = pcall(function()
+		if block.Set then return block:Set(text) end
+		if block.SetDesc then return block:SetDesc(text) end
+		if block.SetText then return block:SetText(text) end
+		if block.Update then return block:Update(text) end
+		if block.Refresh then return block:Refresh(text) end
+	end)
+	-- Fallback para Label simples (reescreve tudo)
+	if not ok then
+		pcall(function()
+			if block.Text ~= nil then
+				block.Text = title .. "\n" .. text
+			end
+		end)
+	end
+end
+--====================================================================--
+
+-- Bloquinhos não clicáveis (todos NA ABA TROLL)
+local timerBlock   = createInfoBlock(TrollTab, "Tempo De Uso De Script", "00:00:00")
+local fpsBlock     = createInfoBlock(TrollTab, "Mostra Fps", "FPS: 0")
+local playersBlock = createInfoBlock(TrollTab, "Quantidade De Pessoas", tostring(#game:GetService("Players"):GetPlayers()))
+
+-- Serviços
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+-- Cronômetro (começa quando o Hub abre)
+local startClock = os.clock()
+
+-- FPS (cálculo suave por frame)
+local currentFPS = 0
+RunService.RenderStepped:Connect(function(dt)
+	currentFPS = math.floor(1/dt + 0.5)
+end)
+
+-- Atualizações periódicas (meio segundo)
+task.spawn(function()
+	while true do
+		task.wait(0.5)
+
+		-- Tempo de uso
+		local e = os.clock() - startClock
+		local h = math.floor(e/3600)
+		local m = math.floor((e%3600)/60)
+		local s = math.floor(e%60)
+		setBlockText(timerBlock, "Tempo De Uso De Script", string.format("%02d:%02d:%02d", h, m, s))
+
+		-- FPS
+		setBlockText(fpsBlock, "Mostra Fps", "FPS: " .. tostring(currentFPS))
+
+		-- Players (reforça o valor mesmo sem eventos)
+		setBlockText(playersBlock, "Quantidade De Pessoas", tostring(#Players:GetPlayers()))
+	end
+end)
+
+-- Atualiza players ao entrar/sair alguém
+local function refreshPlayers()
+	setBlockText(playersBlock, "Quantidade De Pessoas", tostring(#Players:GetPlayers()))
+end
+Players.PlayerAdded:Connect(refreshPlayers)
+Players.PlayerRemoving:Connect(refreshPlayers)
+
 
 TrollTab:AddSection({ "Black Hole" })
 TrollTab:AddButton({
