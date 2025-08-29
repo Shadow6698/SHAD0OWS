@@ -11,19 +11,20 @@ Window:AddMinimizeButton({
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local ImunesTab = Window:MakeTab({"Proteção", "shield"})
+local ImunesTab = Window:MakeTab({ "Proteção", "shield" })
 
 -- Serviços
-local LocalPlayer = game:GetService("Players").LocalPlayer
+local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
+local LocalPlayer = Players.LocalPlayer
 
-
+-- Funções utilitárias para backup/restauração de objetos
 local function moveToBackup(obj, backupTable)
     table.insert(backupTable, { object = obj, originalParent = obj.Parent })
-    obj.Parent = nil -- Remove do jogo sem destruir
+    obj.Parent = nil
 end
-
 local function restoreFromBackup(backupTable)
     for _, data in ipairs(backupTable) do
         if data.object and data.originalParent then
@@ -36,23 +37,19 @@ end
 local removedVehicles, removedCanoes, removedJets, removedHelis, removedBalls = {}, {}, {}, {}, {}
 local antiVehicleConnection, antiCanoeConnection, antiJetConnection, antiHeliConnection, antiBallConnection, antiSitConnection
 
-
 ImunesTab:AddSection({ Name = "Scripts de Proteção Linux Hub" })
-
 ImunesTab:AddButton({
     Name = "Anti Freeze",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/antbug/refs/heads/main/Main.txt"))()
     end
 })
-
 ImunesTab:AddButton({
     Name = " Anti Chaos Hub",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/removeplayers/main/Main.txt"))()
     end
 })
-
 ImunesTab:AddButton({
     Name = "Anti Som",
     Callback = function()
@@ -60,10 +57,7 @@ ImunesTab:AddButton({
     end
 })
 
-
 ImunesTab:AddSection({ Name = "Anti Flings" })
-
-
 ImunesTab:AddToggle({
     Name = "Anti Fling Veículos",
     Default = false,
@@ -92,8 +86,6 @@ ImunesTab:AddToggle({
         end
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = " Anti Canoe Fling",
     Default = false,
@@ -118,8 +110,6 @@ ImunesTab:AddToggle({
         end
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = "Anti Fling Jets",
     Default = false,
@@ -144,8 +134,6 @@ ImunesTab:AddToggle({
         end
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = " Anti Fling Helicópteros",
     Default = false,
@@ -167,8 +155,6 @@ ImunesTab:AddToggle({
         end
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = "Anti Fling Ball",
     Default = false,
@@ -191,9 +177,7 @@ ImunesTab:AddToggle({
     end
 })
 
-
 ImunesTab:AddSection({ Name = "Anti Sit & Anti Lag & Anti Fling Porta" })
-
 ImunesTab:AddToggle({
     Name = "Anti Sit",
     Default = false,
@@ -221,42 +205,23 @@ ImunesTab:AddToggle({
         end
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = "Anti-Lag (Todas Tools)",
     Description = "Ativa ou desativa a deduplicação de todas as ferramentas",
     Default = false,
     Callback = function(state)
-        local Players = game:GetService("Players")
         local dedupLock = {}
-        local IGNORED_PLAYER -- jogador que executou
-
-        if not state then
-            -- Toggle desativada, para automaticamente
-            return
-        end
-
-        -- Marca automaticamente quem executou o script
-        local function marcarIgnorado(player)
-            IGNORED_PLAYER = player
-        end
-
-        -- Aceita qualquer Tool
-        local function isTargetTool(inst)
-            return inst:IsA("Tool")
-        end
-
+        local IGNORED_PLAYER
+        if not state then return end
+        local function marcarIgnorado(player) IGNORED_PLAYER = player end
+        local function isTargetTool(inst) return inst:IsA("Tool") end
         local function gatherTools(player)
-            local found = {}
-            local containers = {}
-
+            local found, containers = {}, {}
             if player.Character then table.insert(containers, player.Character) end
             local backpack = player:FindFirstChildOfClass("Backpack")
             if backpack then table.insert(containers, backpack) end
             local sg = player:FindFirstChild("StarterGear")
             if sg then table.insert(containers, sg) end
-
             for _, container in ipairs(containers) do
                 for _, child in ipairs(container:GetChildren()) do
                     if isTargetTool(child) then
@@ -264,32 +229,23 @@ ImunesTab:AddToggle({
                     end
                 end
             end
-
             return found
         end
-
         local function dedupePlayer(player)
             if player == IGNORED_PLAYER then return end
             if dedupLock[player] then return end
             dedupLock[player] = true
-
             local tools = gatherTools(player)
             if #tools > 1 then
                 for i = 2, #tools do
                     pcall(function() tools[i]:Destroy() end)
                 end
             end
-
             dedupLock[player] = false
         end
-
         local function hookPlayer(player)
-            if not IGNORED_PLAYER then
-                marcarIgnorado(player)
-            end
-
+            if not IGNORED_PLAYER then marcarIgnorado(player) end
             task.defer(dedupePlayer, player)
-
             local function setupChar(char)
                 task.delay(0.5, function() dedupePlayer(player) end)
                 char.ChildAdded:Connect(function(child)
@@ -298,12 +254,8 @@ ImunesTab:AddToggle({
                     end
                 end)
             end
-
-            if player.Character then
-                setupChar(player.Character)
-            end
+            if player.Character then setupChar(player.Character) end
             player.CharacterAdded:Connect(setupChar)
-
             local backpack = player:WaitForChild("Backpack", 10)
             if backpack then
                 backpack.ChildAdded:Connect(function(child)
@@ -312,7 +264,6 @@ ImunesTab:AddToggle({
                     end
                 end)
             end
-
             local sg = player:FindFirstChild("StarterGear") or player:WaitForChild("StarterGear", 10)
             if sg then
                 sg.ChildAdded:Connect(function(child)
@@ -322,13 +273,9 @@ ImunesTab:AddToggle({
                 end)
             end
         end
-
         Players.PlayerAdded:Connect(hookPlayer)
-        for _, plr in ipairs(Players:GetPlayers()) do
-            hookPlayer(plr)
-        end
-
-        -- Varredura periódica
+        for _, plr in ipairs(Players:GetPlayers()) do hookPlayer(plr) end
+        -- Scan periodically
         task.spawn(function()
             while state do
                 for _, plr in ipairs(Players:GetPlayers()) do
@@ -339,39 +286,25 @@ ImunesTab:AddToggle({
         end)
     end
 })
-
-
 ImunesTab:AddToggle({
     Name = "Anti Fling Porta",
     Description = "Ativa ou desativa a destruição de todas as portas do mapa",
     Default = false,
     Callback = function(state)
-        -- Cria variável persistente se não existir
-        if not _G.hiddenDoors then
-            _G.hiddenDoors = {}
-        end
-        
+        if not _G.hiddenDoors then _G.hiddenDoors = {} end
         if state then
-            -- Limpa dados anteriores antes de começar
             _G.hiddenDoors = {}
-            
-            -- Ativa: esconde portas (não remove, só torna invisíveis)
             for _, obj in ipairs(workspace:GetDescendants()) do
                 if obj:IsA("BasePart") and obj.Name:lower():find("door") then
-                    -- Salva o estado original
                     local doorData = {
                         door = obj,
                         originalTransparency = obj.Transparency,
                         originalCanCollide = obj.CanCollide,
                         originalCastShadow = obj.CastShadow
                     }
-                    
-                    -- Esconde a porta (mantém funcionalidade)
                     obj.Transparency = 1
                     obj.CanCollide = false
                     obj.CastShadow = false
-                    
-                    -- Esconde filhos se houver (maçanetas, etc)
                     for _, child in ipairs(obj:GetChildren()) do
                         if child:IsA("BasePart") then
                             child.Transparency = 1
@@ -380,22 +313,16 @@ ImunesTab:AddToggle({
                             child.Enabled = false
                         end
                     end
-                    
                     table.insert(_G.hiddenDoors, doorData)
                 end
             end
             print("🔧 " .. #_G.hiddenDoors .. " portas escondidas!")
-            
         else
-            -- Desativa: restaura portas (volta ao estado original)
             for _, doorData in ipairs(_G.hiddenDoors or {}) do
                 if doorData.door and doorData.door.Parent then
-                    -- Restaura propriedades originais
                     doorData.door.Transparency = doorData.originalTransparency
                     doorData.door.CanCollide = doorData.originalCanCollide
                     doorData.door.CastShadow = doorData.originalCastShadow
-                    
-                    -- Restaura filhos
                     for _, child in ipairs(doorData.door:GetChildren()) do
                         if child:IsA("BasePart") then
                             child.Transparency = 0
@@ -406,11 +333,221 @@ ImunesTab:AddToggle({
                     end
                 end
             end
-            
             print("✅ " .. #(_G.hiddenDoors or {}) .. " portas restauradas com funcionalidade!")
-            _G.hiddenDoors = {} -- Limpa a lista
+            _G.hiddenDoors = {}
         end
     end
+})
+
+-- SISTEMA DE SUMIR/APARECER JOGADOR INDIVIDUAL - UI REDZ HUB (mesma aba)
+local armazenados = {}
+local selectedPlayerName = ""
+local function findPlayerByName(name)
+    name = string.lower(name)
+    for _, player in ipairs(Players:GetPlayers()) do
+        if string.find(string.lower(player.Name), name) then
+            return player
+        end
+    end
+    return nil
+end
+local function sumirJogador(player)
+    if player ~= LocalPlayer and player.Character and player.Character.Parent == workspace then
+        armazenados[player.Name] = player.Character
+        player.Character.Parent = nil
+        return true
+    end
+    return false
+end
+local function aparecerJogador(player)
+    if armazenados[player.Name] and armazenados[player.Name] then
+        armazenados[player.Name].Parent = workspace
+        armazenados[player.Name] = nil
+        return true
+    end
+    return false
+end
+
+ImunesTab:AddSection({ Name = "Escolha O Jogador Se quiser adicionar de mais um adicione primeiro 1 apague o texto" })
+ImunesTab:AddSection({ Name = "depois escolha outro e por aí vai e use /mute (Nick) para silenciar o jogador no chat" })
+ImunesTab:AddTextBox({
+    Name = "Nome do Jogador",
+    Description = "Digite o nome do jogador para sumir/aparecer",
+    PlaceholderText = "Digite o nome...",
+    Callback = function(input)
+        selectedPlayerName = input
+        if input ~= "" then
+            local player = findPlayerByName(input)
+            if player then
+                StarterGui:SetCore("SendNotification", {
+                    Title = "Shad0ws ✅",
+                    Text = "Jogador encontrado: " .. player.Name,
+                    Duration = 3
+                })
+            else
+                StarterGui:SetCore("SendNotification", {
+                    Title = "Shad0ws ❌",
+                    Text = "Jogador '" .. input .. "' não encontrado!",
+                    Duration = 3
+                })
+                selectedPlayerName = ""
+            end
+        end
+    end
+})
+ImunesTab:AddButton({
+    Name = "🫥 Iniciar Sumimento",
+    Description = "Faz o jogador selecionado sumir",
+    Callback = function()
+        if selectedPlayerName == "" then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shad0ws ❌",
+                Text = "Digite um nome na caixa primeiro!",
+                Duration = 3
+            })
+            return
+        end
+        local player = findPlayerByName(selectedPlayerName)
+        if player then
+            if armazenados[player.Name] then
+                StarterGui:SetCore("SendNotification", {
+                    Title = "Shad0ws ⚠️",
+                    Text = player.Name .. " já está sumido!",
+                    Duration = 3
+                })
+            else
+                local success = sumirJogador(player)
+                if success then
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "ImunesTab 🫥",
+                        Text = "SUMIU: " .. player.Name,
+                        Duration = 3
+                    })
+                else
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "Shad0ws ❌",
+                        Text = "Não foi possível sumir " .. player.Name,
+                        Duration = 3
+                    })
+                end
+            end
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shad0ws ❌",
+                Text = "Jogador não encontrado!",
+                Duration = 3
+            })
+        end
+    end
+})
+ImunesTab:AddButton({
+    Name = "👁️ Parar Sumimento", 
+    Description = "Faz o jogador selecionado aparecer novamente",
+    Callback = function()
+        if selectedPlayerName == "" then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shadows",
+                Text = "Digite um nome na caixa primeiro!",
+                Duration = 3
+            })
+            return
+        end
+        local player = findPlayerByName(selectedPlayerName)
+        if player then
+            if armazenados[player.Name] then
+                local success = aparecerJogador(player)
+                if success then
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "Shad0ws 👁️",
+                        Text = "APARECEU: " .. player.Name,
+                        Duration = 3
+                    })
+                else
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "Shad0ws ❌",
+                        Text = "Erro ao fazer " .. player.Name .. " aparecer",
+                        Duration = 3
+                    })
+                end
+            else
+                StarterGui:SetCore("SendNotification", {
+                    Title = "Shad0ws ⚠️",
+                    Text = player.Name .. " não está sumido!",
+                    Duration = 3
+                })
+            end
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shad0ws ❌",
+                Text = "Jogador não encontrado!",
+                Duration = 3
+            })
+        end
+    end
+})
+ImunesTab:AddButton({
+    Name = "👁️ Aparecer Todos",
+    Description = "Faz TODOS os jogadores sumidos aparecerem",
+    Callback = function()
+        local count = 0
+        for nome, character in pairs(armazenados) do
+            if Players:FindFirstChild(nome) and character then
+                character.Parent = workspace
+                count = count + 1
+            end
+        end
+        armazenados = {}
+        if count > 0 then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Jogadores Apareceu",
+                Text = "TODOS APARECERAM: " .. count .. " jogador(es)",
+                Duration = 4
+            })
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "Nenhum Jogador Sumido ⚠️",
+                Text = "Nenhum jogador estava sumido!",
+                Duration = 3
+            })
+        end
+    end
+})
+ImunesTab:AddButton({
+    Name = "📋 Listar Sumidos",
+    Description = "Mostra todos os jogadores que estão sumidos",
+    Callback = function()
+        local count, names = 0, {}
+        for nome, _ in pairs(armazenados) do
+            if Players:FindFirstChild(nome) then
+                count = count + 1
+                table.insert(names, nome)
+            end
+        end
+        if count > 0 then
+            local list = table.concat(names, ", ")
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shad0ws 📋",
+                Text = count .. " sumido(s): " .. list,
+                Duration = 5
+            })
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "Shad0ws 📋",
+                Text = "Nenhum jogador está sumido!",
+                Duration = 3
+            })
+        end
+    end
+})
+Players.PlayerRemoving:Connect(function(player)
+    if armazenados[player.Name] then
+        armazenados[player.Name] = nil
+    end
+end)
+StarterGui:SetCore("SendNotification", {
+    Title = "Shad0ws - Sistema de Sumimento",
+    Text = "✅ Sistema carregado!",
+    Duration = 5
 })
 
 
