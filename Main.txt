@@ -520,7 +520,7 @@ ImunesTab:AddToggle({
 })
 
 ImunesTab:AddButton({
-    Name = "⚡ Multiplicar + TP TURBO",
+    Name = "lagar players",
     Description = "Multiplica laptops ultra rápido e teleporta no alvo sem lag",
     Callback = function()
         local Players = game:GetService("Players")
