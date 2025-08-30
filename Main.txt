@@ -519,6 +519,103 @@ ImunesTab:AddToggle({
     end
 })
 
+ImunesTab:AddToggle({
+    Name = "⚡ Lagar Jogador",
+    Description = "Ativa ou desativa o lag no jogador escolhido",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local StarterGui = game:GetService("StarterGui")
+
+        -- Variáveis globais persistentes
+        if not _G.lagTargetName then
+            _G.lagTargetName = ""
+        end
+        if not _G.lagTextboxCreated then
+            ImunesTab:AddTextBox({
+                Name = "Nome do Jogador",
+                Description = "Digite o nome do jogador para lagar",
+                PlaceholderText = "Digite o nome...",
+                Callback = function(input)
+                    _G.lagTargetName = input
+                    if input ~= "" then
+                        local found = nil
+                        for _, p in ipairs(Players:GetPlayers()) do
+                            if string.find(string.lower(p.Name), string.lower(input)) or string.find(string.lower(p.DisplayName), string.lower(input)) then
+                                found = p
+                                break
+                            end
+                        end
+                        if found then
+                            StarterGui:SetCore("SendNotification", {
+                                Title = "✅ Jogador selecionado",
+                                Text = found.Name,
+                                Duration = 3
+                            })
+                        else
+                            StarterGui:SetCore("SendNotification", {
+                                Title = "❌ Erro",
+                                Text = "Jogador '" .. input .. "' não encontrado!",
+                                Duration = 3
+                            })
+                            _G.lagTargetName = ""
+                        end
+                    end
+                end
+            })
+            _G.lagTextboxCreated = true
+        end
+
+        -- Função de loop de lag
+        local function lagarJogador(player)
+            spawn(function()
+                local contador = 0
+                local inicio = tick()
+                while state and _G.lagTargetName == player.Name do
+                    task.wait(0.0001) -- curtíssimo delay
+                    contador = contador + 1
+                    if contador % 500 == 0 then
+                        local tempo = tick() - inicio
+                        local cps = math.floor(contador / math.max(0.1, tempo))
+                        print("⚡ Lag em " .. player.Name .. ": " .. contador .. " ticks (" .. cps .. "/s)")
+                    end
+                    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        local hrp = player.Character.HumanoidRootPart
+                        hrp.CFrame = hrp.CFrame * CFrame.new(math.random(-1, 1), 0, math.random(-1, 1))
+                    end
+                end
+            end)
+            return true
+        end
+
+        -- Ativar/desativar lag
+        if state then
+            local player = Players:FindFirstChild(_G.lagTargetName)
+            if player then
+                if lagarJogador(player) then
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "⚡ Lagar Jogador",
+                        Text = player.Name .. " está sendo lagado!",
+                        Duration = 3
+                    })
+                end
+            else
+                StarterGui:SetCore("SendNotification", {
+                    Title = "❌ Erro",
+                    Text = "Digite o nome de um jogador válido!",
+                    Duration = 3
+                })
+            end
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "🛑 Lagar Jogador",
+                Text = "Lag desativado!",
+                Duration = 3
+            })
+        end
+    end
+})
+
 local TrollTab = Window:MakeTab({ Title = "Scripts Trolls", Icon = "rbxassetid://13364900349" })
 
 
