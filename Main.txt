@@ -520,8 +520,8 @@ ImunesTab:AddToggle({
 })
 
 ImunesTab:AddButton({
-    Name = "Lagar player",
-    Description = "Multiplica laptops ultra rápido e teleporta em cima do jogador alvo",
+    Name = "⚡ Multiplicar + TP RÁPIDO",
+    Description = "Multiplica laptops ultra rápido e teleporta em cima do alvo",
     Callback = function()
         local Players = game:GetService("Players")
         local StarterGui = game:GetService("StarterGui")
@@ -533,80 +533,66 @@ ImunesTab:AddButton({
         if not _G.quantidadeLaptops then _G.quantidadeLaptops = 100 end
         if not _G.multiplicacaoAtiva then _G.multiplicacaoAtiva = false end
         if not _G.laptopOriginal then _G.laptopOriginal = nil end
+        if not _G.alturaTP then _G.alturaTP = 2 end
+        if not _G.tbAlvoCreated then _G.tbAlvoCreated = false end
+        if not _G.tbQuantidadeCreated then _G.tbQuantidadeCreated = false end
 
-        -- TextBox para definir jogador alvo
-        if not _G.alvoTextboxCreated then
-            ImunesTab:AddTextBox({
-                Name = "Nome do Jogador Alvo",
-                Description = "Digite o nome do jogador para teleportar em cima dele",
-                PlaceholderText = "Exemplo: Jogador123",
-                Callback = function(Value)
-                    if Value == "" then
-                        _G.targetPlayer = nil
-                        print("Alvo removido")
-                        return
-                    end
-                    for _, player in pairs(Players:GetPlayers()) do
-                        if player.Name:lower():find(Value:lower()) or player.DisplayName:lower():find(Value:lower()) then
-                            _G.targetPlayer = player
-                            print("Alvo definido: " .. player.Name)
-                            return
-                        end
-                    end
-                    print("Jogador não encontrado: " .. Value)
-                    _G.targetPlayer = nil
-                end
-            })
-            _G.alvoTextboxCreated = true
-        end
-
-        -- TextBox para quantidade de laptops
-        if not _G.quantidadeTextboxCreated then
+        -- TextBox para definir quantidade de laptops (criada apenas uma vez)
+        if not _G.tbQuantidadeCreated then
             ImunesTab:AddTextBox({
                 Name = "Quantidade de Laptops",
                 Description = "Digite quantos laptops quer multiplicar (0 = infinito)",
-                PlaceholderText = "Exemplo: 100, 5000, 0",
+                PlaceholderText = "Ex: 1000, 5000, 0",
                 Callback = function(Value)
                     local num = tonumber(Value)
                     if num and num >= 0 then
                         _G.quantidadeLaptops = num
-                        print("Quantidade definida: " .. num)
+                        if num == 0 then
+                            StarterGui:SetCore("SendNotification", {Title="⚡ Info", Text="Modo infinito ativado!", Duration=3})
+                        else
+                            StarterGui:SetCore("SendNotification", {Title="⚡ Info", Text="Quantidade definida: "..num, Duration=3})
+                        end
                     else
-                        print("Quantidade inválida!")
+                        StarterGui:SetCore("SendNotification", {Title="❌ Erro", Text="Valor inválido!", Duration=3})
                     end
                 end
             })
-            _G.quantidadeTextboxCreated = true
+            _G.tbQuantidadeCreated = true
         end
 
-        -- Botão para limpar inventário
-        if not _G.limparInventarioCreated then
-            ImunesTab:AddButton({
-                Name = "🔄 Limpar Inventário",
-                Description = "Remove todos os laptops do inventário",
-                Callback = function()
-                    local backpack = localPlayer.Backpack
-                    local character = localPlayer.Character
-                    for _, item in pairs(backpack:GetChildren()) do
-                        if item:IsA("Tool") and item.Name == "Laptop" then
-                            item:Destroy()
+        -- TextBox para definir alvo (criada apenas uma vez)
+        if not _G.tbAlvoCreated then
+            ImunesTab:AddTextBox({
+                Name = "Nome do Jogador Alvo",
+                Description = "Digite o nome do jogador para teleportar em cima dele",
+                PlaceholderText = "Ex: Jogador123",
+                Callback = function(Value)
+                    if Value == "" then
+                        _G.targetPlayer = nil
+                        StarterGui:SetCore("SendNotification", {Title="⚡ Info", Text="Alvo removido", Duration=3})
+                        return
+                    end
+                    local found = nil
+                    for _, p in ipairs(Players:GetPlayers()) do
+                        if string.find(p.Name:lower(), Value:lower()) or string.find(p.DisplayName:lower(), Value:lower()) then
+                            found = p
+                            break
                         end
                     end
-                    if character then
-                        for _, item in pairs(character:GetChildren()) do
-                            if item:IsA("Tool") and item.Name == "Laptop" then
-                                item:Destroy()
-                            end
-                        end
+                    if found then
+                        _G.targetPlayer = found
+                        StarterGui:SetCore("SendNotification", {Title="✅ Alvo definido", Text=found.Name, Duration=3})
+                    else
+                        _G.targetPlayer = nil
+                        StarterGui:SetCore("SendNotification", {Title="❌ Erro", Text="Jogador não encontrado!", Duration=3})
                     end
-                    print("Inventário limpo!")
                 end
             })
-            _G.limparInventarioCreated = true
+            _G.tbAlvoCreated = true
         end
 
-        -- Função para clicar ultra rápido
-        local function clickUltraRapido(object)
+        -- Função para clicar super rápido
+        local function clickSuperRapido(object)
             local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
             if clickDetector then
                 for i = 1, 1000 do
@@ -618,62 +604,121 @@ ImunesTab:AddButton({
             end
         end
 
-        -- Função de multiplicação + TP
-        local function loopMultiplicarTP()
-            if not _G.laptopOriginal then
-                _G.laptopOriginal = workspace:FindFirstChild("WorkspaceCom")
+        -- Função para limpar inventário
+        local function limparInventario()
+            local backpack = localPlayer.Backpack
+            local character = localPlayer.Character
+
+            for _, item in pairs(backpack:GetChildren()) do
+                if item:IsA("Tool") and item.Name == "Laptop" then item:Destroy() end
+            end
+            if character then
+                for _, item in pairs(character:GetChildren()) do
+                    if item:IsA("Tool") and item.Name == "Laptop" then item:Destroy() end
+                end
+            end
+
+            StarterGui:SetCore("SendNotification", {Title="🔄 Inventário", Text="Inventário limpo!", Duration=3})
+        end
+
+        -- Função de multiplicação ultra rápida
+        local function multiplicarLaptopsUltraRapido()
+            _G.laptopOriginal = workspace:FindFirstChild("WorkspaceCom")
+            if _G.laptopOriginal then
+                _G.laptopOriginal = _G.laptopOriginal:FindFirstChild("001_GiveTools")
                 if _G.laptopOriginal then
-                    _G.laptopOriginal = _G.laptopOriginal:FindFirstChild("001_GiveTools")
-                    if _G.laptopOriginal then
-                        _G.laptopOriginal = _G.laptopOriginal:FindFirstChild("Laptop")
-                    end
+                    _G.laptopOriginal = _G.laptopOriginal:FindFirstChild("Laptop")
                 end
             end
             if not _G.laptopOriginal then
-                warn("Laptop original não encontrado!")
-                return
+                StarterGui:SetCore("SendNotification", {Title="❌ Erro", Text="Laptop original não encontrado!", Duration=3})
+                return false
             end
 
             _G.multiplicacaoAtiva = true
             if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                localPlayer.Character.HumanoidRootPart.CFrame = _G.laptopOriginal.CFrame + Vector3.new(0, 3, 0)
+                localPlayer.Character.HumanoidRootPart.CFrame = _G.laptopOriginal.CFrame + Vector3.new(0,3,0)
                 task.wait(0.05)
             end
 
             local contador = 0
             local inicio = tick()
             while _G.toggleTPAlvo and (_G.quantidadeLaptops == 0 or contador < _G.quantidadeLaptops) do
-                clickUltraRapido(_G.laptopOriginal)
+                clickSuperRapido(_G.laptopOriginal)
                 contador = contador + 1
-
                 if contador % 200 == 0 then
-                    local tempoDecorrido = tick() - inicio
-                    local lps = math.floor(contador / math.max(0.1, tempoDecorrido))
-                    print("Multiplicados " .. contador .. " laptops (" .. lps .. "/s)")
+                    local tempo = tick()-inicio
+                    local cps = math.floor(contador / math.max(0.1, tempo))
+                    print("Multiplicados "..contador.." laptops ("..cps.."/s)")
                 end
-
-                -- Teleporte em cima do jogador
-                if _G.targetPlayer and _G.targetPlayer.Character and _G.targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local rootPos = _G.targetPlayer.Character.HumanoidRootPart.Position
-                    localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(rootPos.X, rootPos.Y + 2, rootPos.Z)
-                end
-
-                task.wait(0.00005)
             end
             _G.multiplicacaoAtiva = false
+            return true
         end
 
-        -- Ativar toggle global
-        _G.toggleTPAlvo = true
-        if _G.targetPlayer then
-            spawn(loopMultiplicarTP)
-        else
-            StarterGui:SetCore("SendNotification", {
-                Title = "❌ Erro",
-                Text = "Defina um alvo primeiro!",
-                Duration = 3
+        -- Loop TP rápido
+        local function loopTeleporteAlvo()
+            if not _G.multiplicacaoAtiva then multiplicarLaptopsUltraRapido() end
+            if _G.quantidadeLaptops > 0 then
+                while _G.multiplicacaoAtiva do task.wait(0.05) end
+            end
+
+            local tpCount = 0
+            local inicioTP = tick()
+            while _G.toggleTPAlvo do
+                if _G.targetPlayer and _G.targetPlayer.Character and _G.targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                        local rootPos = _G.targetPlayer.Character.HumanoidRootPart.Position
+                        localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(rootPos.X, rootPos.Y + _G.alturaTP, rootPos.Z)
+                        tpCount = tpCount + 1
+                        if tpCount % 500 == 0 then
+                            local tempoTP = tick() - inicioTP
+                            local tps = math.floor(tpCount / math.max(0.1, tempoTP))
+                            print("TPs realizados: "..tpCount.." ("..tps.."/s)")
+                        end
+                        if _G.quantidadeLaptops == 0 then clickSuperRapido(_G.laptopOriginal) end
+                    end
+                else
+                    task.wait(0.5)
+                end
+                task.wait(0.00005)
+            end
+        end
+
+        -- Toggle para ativar/desativar
+        if not _G.toggleCreated then
+            ImunesTab:AddToggle({
+                Name = "Ativar Multiplicar + TP",
+                Default = false,
+                Callback = function(state)
+                    _G.toggleTPAlvo = state
+                    if state then
+                        if _G.targetPlayer then
+                            spawn(function()
+                                loopTeleporteAlvo()
+                            end)
+                        else
+                            StarterGui:SetCore("SendNotification", {Title="❌ Erro", Text="Defina um alvo primeiro!", Duration=3})
+                            _G.toggleTPAlvo = false
+                        end
+                    else
+                        StarterGui:SetCore("SendNotification", {Title="⚡ Info", Text="Processo interrompido", Duration=3})
+                    end
+                end
             })
-            _G.toggleTPAlvo = false
+            _G.toggleCreated = true
+        end
+
+        -- Botão para limpar inventário
+        if not _G.buttonLimparCreated then
+            ImunesTab:AddButton({
+                Name = "🔄 Limpar Inventário",
+                Description = "Remove todos os laptops do inventário",
+                Callback = function()
+                    limparInventario()
+                end
+            })
+            _G.buttonLimparCreated = true
         end
     end
 })
